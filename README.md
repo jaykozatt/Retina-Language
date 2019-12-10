@@ -1,2 +1,2 @@
 # Retina-Language
-An interpreted language written in Ruby, designed to turn code into pixel drawing.
+An interpreter for the language Retina, written in Ruby, designed to turn code into pixel drawing.
