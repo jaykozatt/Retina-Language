@@ -1,0 +1,6 @@
+program
+	with
+	do
+		forward(505);
+	end;
+end;

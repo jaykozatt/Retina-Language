@@ -1,0 +1,84 @@
+#!/usr/bin/ruby
+# -*- coding: utf-8 -*-
+
+# Retina Language Interpreter
+# 	:Main function
+#
+# Author:  Jonathan Reyes (Alias: Jay Kozatt)
+#
+
+require_relative 'retina_parser'
+
+def main
+  # Check extension
+  ARGV[0] =~ /\w+\.rtn/;
+  if $&.nil?; puts "Extensión de archivo desconocida."; return; end;
+  
+  # Open file as a string
+  begin
+    f = File.open(ARGV[0], 'r');
+    input = f.read();
+  rescue
+    puts("Archivo no encontrado.");
+    return;
+  end;
+  
+  # Create lexer
+  lexer = Lexer.new(input);
+  # Get tokens until input is empty
+  while lexer.catch_lexeme; end;
+  # Print Exceptions caused by unknown tokens
+  if not lexer.unknown.empty?
+    lexer.unknown.each { |t| puts(t) }
+    abort
+  end
+
+  # Test grammar
+  begin
+    lexer = Lexer.new(input)
+    parser = Parser.new()
+    ast = parser.parse(lexer)
+    #ast.print_ast() # DEBUGGING
+  rescue SyntacticError => e
+    abort("#{e}")
+  end
+
+  # Try building symbol table and check context. Then, run the instructions
+  begin
+  	ast.build_table()
+  	#ast.print_scope # DEBUGGING
+  	#puts ast.var_table # DEBUGGING
+  	ast.check()
+    ast.execute(ARGV[0])
+  rescue RedefineVarError => e
+  	abort("#{e}")
+  rescue RedefineFooError => e
+  	abort("#{e}")
+  rescue SymTableError => e
+  	abort("#{e}")
+  rescue ContextError => e
+  	abort("#{e}")
+  rescue DataTypeError => e
+  	abort("#{e}")
+  rescue UnexpectedParamError => e
+  	abort("#{e}")
+  rescue InitializationError => e
+  	abort("#{e}")
+  rescue ExpectedReturnError => e 
+  	abort("#{e}")
+  rescue UnexpectedReturnError => e
+  	abort("#{e}")
+  rescue UndeclaredFunctionError => e
+  	abort("#{e}")
+  rescue UndeclaredVariableError => e
+  	abort("#{e}")
+  rescue ReturnTypeError => e
+  	abort("#{e}")
+  rescue DivisionByZeroError => e
+  	abort("#{e}")
+  rescue InvalidRangeError => e
+  	abort("#{e}")
+  end
+end;
+
+main

@@ -1,0 +1,8 @@
+func hello()
+begin
+	write "hello", "world";
+end;
+
+program
+	hello();
+end;

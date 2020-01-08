@@ -1,0 +1,19 @@
+program #hallo;
+    with
+        number x = 4;
+        boolean test = true and false;
+    do
+        repeat x times
+            forward(50);
+            rotatel(90);
+            arc(90,250);
+            if test then
+                writeln "you won't see me";
+            	forward(25+34*-2);
+            else
+            	rotatel(45);
+            end;
+            write "hello";
+        end;
+    end;
+end;

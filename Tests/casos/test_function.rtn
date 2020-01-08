@@ -1,0 +1,17 @@
+func hello(number n)
+begin
+	writeln "hey!";
+	if n > 0 then
+		writeln "hello";
+		hello(n);
+	end;
+	return true;
+end;
+
+program
+	with
+		number n = 5;
+	do
+		hello(n-1);
+	end;
+end; 

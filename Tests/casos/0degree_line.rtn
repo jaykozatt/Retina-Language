@@ -1,0 +1,7 @@
+program
+	with
+	do
+		rotater(90);
+		forward(500);
+	end;
+end;
