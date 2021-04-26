@@ -6,6 +6,7 @@ Retina is a computer language designed to convert code instructions into a pixel
 Complex shapes can be drawn by means of tracing basic lines, curves, and even skipping pixels.
 
 The project holds a folder containing some samples of what can be achieved through the use of few lines of code. 
+(.rtn are the source files, while .pbm are the drawings)
 
 # Requirements
 * Ruby 2.5.1
